@@ -1,0 +1,8 @@
+encryptionsalt: v1:R7ORHSkiXwM=:v1:Vul1aF60npLe7q/9:huLvN5lSTw79M6z5T7JE0LKPuGKIKA==
+config:
+  azure-native:clientId: 200f095c-4937-4344-92a7-c5d737f0c765
+  azure-native:clientSecret:
+    secure: v1:2v5Q5N5RUv6gth3l:CvNKTjxZzR0PPtc0z5X8pDMmAdYLyws2yFd6/G/s7Zy0Xs+joRNn8GQPWn5F2dXcMPkVsw==
+  azure-native:location: CanadaCentral
+  azure-native:subscriptionId: 30fa5d71-0e59-4958-ac11-35eb198525e1
+  azure-native:tenantId: 17c9e9df-4332-4bda-b7d6-1ad9fc6566b9

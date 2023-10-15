@@ -1,0 +1,11 @@
+{
+    "name": "shared-assets",
+    "main": "index.ts",
+    "devDependencies": {
+        "@types/node": "^16"
+    },
+    "dependencies": {
+        "@pulumi/azure-native": "^2.0.0",
+        "@pulumi/pulumi": "^3.0.0"
+    }
+}
