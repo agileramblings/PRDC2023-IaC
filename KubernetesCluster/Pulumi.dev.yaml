@@ -1,0 +1,12 @@
+encryptionsalt: v1:9Z6yJTmoIdA=:v1:EhAgpy1jB3/pzblT:Jjrqt7AWCAlmxmqZWDVMkiJvLEdShA==
+config:
+  azure-native:location: CanadaCentral
+  kubernetes-cluster:agentPoolProfiles:
+      - count: 1
+        name: small
+        size: Standard_DS2_v2
+      - count: 1
+        name: large
+        size: Standard_E4s_v5
+  kubernetes-cluster:environment: prdc2023
+  kubernetes-cluster:kubernetesVersion: 1.26.6
