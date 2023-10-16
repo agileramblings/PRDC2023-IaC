@@ -9,7 +9,7 @@ const chartName = "traefik";
 const appName = chartName+"-ext";
 const env = pulumi.getStack();
 
-export class TraefikExtIngressController extends pulumi.ComponentResource{
+export class TraefikExtIngressController extends pulumi.ComponentResource {
 
     public instantiated:boolean;
     public readonly ingressConfiguration: cfg.IngressConfiguration;
@@ -21,15 +21,15 @@ export class TraefikExtIngressController extends pulumi.ComponentResource{
         super("pulumi-contrib:components:TraefikExtIngressController", name, inputs, opts);
         this.instantiated = true;
         
-        var secret = new k8s.core.v1.Secret(
-            "secret-" + appName,
-            {
-                metadata: { name: `docker-credentials-${appName}`, namespace: defaultNamespace },
-                data: { ".dockerconfigjson": config.acrCredentials },
-                type: "kubernetes.io/dockerconfigjson",
-            },
-            { provider: config.k8sProvider }
-        );
+        // var secret = new k8s.core.v1.Secret(
+        //     "secret-" + appName,
+        //     {
+        //         metadata: { name: `docker-credentials-${appName}`, namespace: defaultNamespace },
+        //         data: { ".dockerconfigjson": config.acrCredentials },
+        //         type: "kubernetes.io/dockerconfigjson",
+        //     },
+        //     { provider: config.k8sProvider }
+        // );
 
         //https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
         const traefikIngress = new k8s.helm.v3.Chart(
@@ -37,7 +37,8 @@ export class TraefikExtIngressController extends pulumi.ComponentResource{
             {
                 chart: chartName,
                 fetchOpts: {
-                    repo: "https://helm.traefik.io/traefik",
+                    //repo: "https://helm.traefik.io/traefik",
+                    repo: "https://traefik.github.io/charts",
                     version: "10.24.0",
                 },
                 transformations: [
@@ -125,7 +126,8 @@ export class TraefikExtIngressController extends pulumi.ComponentResource{
 
         const frontend = traefikIngress.getResourceProperty("v1/Service", appName, "status");
         const ingress = frontend.loadBalancer.ingress[0];
-        const frontendIp = ingress.apply(x => x.ip ?? x.hostname);
+        //const frontendIp = ingress.apply(x => x.ip ?? x.hostname);
+        const frontendIp = pulumi.interpolate `127.0.0.1`;
         this.ingressConfiguration = new cfg.IngressConfiguration(false, frontendIp, "", appName);
 
         const exposePublicly: boolean = false;

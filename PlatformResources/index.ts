@@ -27,10 +27,10 @@ const installConfig = new cfg.ConfigurationOptions(k8sProvider, zoneName, pulumi
 var s: seq.SeqInstaller = { instantiated: false } as seq.SeqInstaller;
 var k: kuard.KuardInstaller = { instantiated: false } as kuard.KuardInstaller;
 const cm = new certMgr.CertManagerInstaller(`cert-manager-installer-${env}`, installConfig);
-//var publicIngress: traefik.TraefikExtIngressController = { instantiated: false } as traefik.TraefikExtIngressController;
+var publicIngress: traefik.TraefikExtIngressController = { instantiated: false } as traefik.TraefikExtIngressController;
 
-//publicIngress = new traefik.TraefikExtIngressController(`traefik-ext-installer-${env}`, installConfig);
-//publicIngress.ingressConfiguration.certManagerIssuer = config.get("letsEncryptClusterIssuer") || consts.leStagingIssuer;
-//k = new kuard.KuardInstaller(`kuard-installer-${env}`, installConfig, publicIngress.ingressConfiguration);
-//s = new seq.SeqInstaller(`seq-installer-${env}`, installConfig, publicIngress.ingressConfiguration);
-//export const traefikPublicLoadBalancerIpAddress = publicIngress.instantiated ? publicIngress.ingressConfiguration.ipAddress : null;
+publicIngress = new traefik.TraefikExtIngressController(`traefik-ext-installer-${env}`, installConfig);
+publicIngress.ingressConfiguration.certManagerIssuer = config.get("letsEncryptClusterIssuer") || consts.leStagingIssuer;
+k = new kuard.KuardInstaller(`kuard-installer-${env}`, installConfig, publicIngress.ingressConfiguration);
+s = new seq.SeqInstaller(`seq-installer-${env}`, installConfig, publicIngress.ingressConfiguration);
+export const traefikPublicLoadBalancerIpAddress = publicIngress.instantiated ? publicIngress.ingressConfiguration.ipAddress : null;

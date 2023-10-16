@@ -229,32 +229,30 @@ export class SeqInstaller extends ComponentResource {
 
 
 
-        const uiUri = new network.RecordSet(`${appName}-${env}-${consts.aRecordPostFix}`, {
-            relativeRecordSetName: config.isShared ? "seq" : `${env}.seq`,
-            zoneName: config.zoneName,
-            recordType: "A",
-            resourceGroupName: config.zoneResourceGroupName,
-            ttl: 600,
-            aRecords: [{ ipv4Address: ingressConfiguration.ipAddress }],
-        });
+        // const uiUri = new network.RecordSet(`${appName}-${env}-${consts.aRecordPostFix}`, {
+        //     relativeRecordSetName: config.isShared ? "seq" : `${env}.seq`,
+        //     zoneName: config.zoneName,
+        //     recordType: "A",
+        //     resourceGroupName: config.zoneResourceGroupName,
+        //     ttl: 600,
+        //     aRecords: [{ ipv4Address: ingressConfiguration.ipAddress }],
+        // });
 
-        const ingestionUri = new network.RecordSet(`${appName}-ingestion-${env}-${consts.aRecordPostFix}`, {
-            relativeRecordSetName: config.isShared ? "seq-ingestion" : `${env}.seq-ingestion`,
-            zoneName: config.zoneName,
-            recordType: "A",
-            resourceGroupName: config.zoneResourceGroupName,
-            ttl: 600,
-            aRecords: [{ ipv4Address: ingressConfiguration.ipAddress }],
-        });
+        // const ingestionUri = new network.RecordSet(`${appName}-ingestion-${env}-${consts.aRecordPostFix}`, {
+        //     relativeRecordSetName: config.isShared ? "seq-ingestion" : `${env}.seq-ingestion`,
+        //     zoneName: config.zoneName,
+        //     recordType: "A",
+        //     resourceGroupName: config.zoneResourceGroupName,
+        //     ttl: 600,
+        //     aRecords: [{ ipv4Address: ingressConfiguration.ipAddress }],
+        // });
 
-
-
-        this.deploySecureIngress([ pulumi.interpolate`${uiUri.name}.${config.zoneName}` ], 
-                                 [ pulumi.interpolate`${ingestionUri.name}.${config.zoneName}` ], 
-                                 namespace, 
-                                 ingressConfiguration, 
-                                 config.k8sProvider, 
-                                 `${appName}${consts.ingressPostfix}`);
+        // this.deploySecureIngress([ pulumi.interpolate`${uiUri.name}.${config.zoneName}` ], 
+        //                          [ pulumi.interpolate`${ingestionUri.name}.${config.zoneName}` ], 
+        //                          namespace, 
+        //                          ingressConfiguration, 
+        //                          config.k8sProvider, 
+        //                          `${appName}${consts.ingressPostfix}`);
     }
 
 

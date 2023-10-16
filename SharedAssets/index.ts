@@ -25,5 +25,11 @@ const platformZone = new network.Zone(`dz-prdc2023`, {
     zoneType: "Public"
 });
 
+// Create an Azure Resource Group
+const rgName2 = `rg-prdc2023-shared-demo`;
+const resourceGroup2 = new resources.ResourceGroup(rgName2, {
+    resourceGroupName: rgName2
+});
+
 export const sharedAssetsResourceGroupName = resourceGroup.name;
 export const platformZoneName = platformZone.name;
